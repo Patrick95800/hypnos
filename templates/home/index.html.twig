@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue chez Hypnos{% endblock %}
+
+{% block body %}
+    <h1>Venez passer une nuit de rêves dans l'un de nos hotels</h1>
+
+    {% for hotel in hotels %}
+        <h2>
+            <a href="{{ path('hotel', {'slug': hotel.slug}) }}">{{ hotel.name }}</a>
+        </h2>
+        <p>Description: {{ hotel.description }}</p>
+        <p>Adresse complete: {{ hotel.address }}</p>
+        <p>Ville: {{ hotel.city }}</p>
+    {% endfor %}
+{% endblock %}

@@ -83,6 +83,7 @@ class AppFixtures extends Fixture
         $hotel->setDescription('Le Victoria Palace Hotel se situe à 250 mètres de la rue du Cherche-Midi datant du XVIIIème siècle, ainsi qu’à 750 mètres de la gare Montparnasse et du grand magasin Le Bon Marché. Une connexion Wi-Fi est disponible gratuitement dans l’ensemble de l’établissement.');
         $hotel->setAddress('6 Rue Blaise Desgoffe, 6e arr., 75006 Paris, France');
         $hotel->setCity('Paris');
+        $hotel->setSlug('victoria-palace-hotel');
         $hotel->setOwner($user2);
         $user2->setHotel($hotel);
         $manager->persist($hotel);
@@ -92,6 +93,7 @@ class AppFixtures extends Fixture
         $hotel2->setDescription('Cet hôtel de caractère de luxe se situe en plein cœur de Paris, près de l’Avenue des Champs-Elysées. Il présente une décoration élégante et un mobilier unique.');
         $hotel2->setAddress(' 7 rue Clément Marot, 8e arr., 75008 Paris, France');
         $hotel2->setCity('Paris');
+        $hotel2->setSlug('hotel-west-end');
         $hotel2->setOwner($user3);
         $user3->setHotel($hotel2);
         $manager->persist($hotel2);

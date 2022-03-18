@@ -37,6 +37,9 @@ class Hotel
     #[ORM\JoinColumn(nullable: false)]
     private $owner;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $slug;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -164,6 +167,18 @@ class Hotel
     public function setOwner(User $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
