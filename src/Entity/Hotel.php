@@ -30,9 +30,17 @@ class Hotel
     #[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Booking::class, orphanRemoval: true)]
     private $bookings;
 
+    #[ORM\OneToMany(mappedBy: 'hotel', targetEntity: Suite::class, orphanRemoval: true)]
+    private $suites;
+
+    #[ORM\OneToOne(inversedBy: 'hotel', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private $owner;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        $this->suites = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -114,6 +122,48 @@ class Hotel
                 $booking->setHotel(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Suite>
+     */
+    public function getSuites(): Collection
+    {
+        return $this->suites;
+    }
+
+    public function addSuite(Suite $suite): self
+    {
+        if (!$this->suites->contains($suite)) {
+            $this->suites[] = $suite;
+            $suite->setHotel($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSuite(Suite $suite): self
+    {
+        if ($this->suites->removeElement($suite)) {
+            // set the owning side to null (unless already changed)
+            if ($suite->getHotel() === $this) {
+                $suite->setHotel(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

@@ -30,6 +30,10 @@ class Suite
     #[ORM\OneToMany(mappedBy: 'suite', targetEntity: Booking::class, orphanRemoval: true)]
     private $bookings;
 
+    #[ORM\ManyToOne(targetEntity: Hotel::class, inversedBy: 'suites')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $hotel;
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -114,6 +118,18 @@ class Suite
                 $booking->setSuite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getHotel(): ?Hotel
+    {
+        return $this->hotel;
+    }
+
+    public function setHotel(?Hotel $hotel): self
+    {
+        $this->hotel = $hotel;
 
         return $this;
     }

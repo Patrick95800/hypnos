@@ -12,6 +12,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public const ROLE_ADMIN = 'ROLE_ADMIN'; // Administrateur
+    public const ROLE_MANAGER = 'ROLE_MANAGER'; // Gérant
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -34,6 +37,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Booking::class)]
     private $bookings;
+
+    #[ORM\OneToOne(mappedBy: 'owner', targetEntity: Hotel::class, cascade: ['persist', 'remove'])]
+    private $hotel;
 
     public function __construct()
     {
@@ -160,6 +166,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $booking->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getHotel(): ?Hotel
+    {
+        return $this->hotel;
+    }
+
+    public function setHotel(Hotel $hotel): self
+    {
+        // set the owning side of the relation if necessary
+        if ($hotel->getOwner() !== $this) {
+            $hotel->setOwner($this);
+        }
+
+        $this->hotel = $hotel;
 
         return $this;
     }
