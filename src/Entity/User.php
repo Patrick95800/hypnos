@@ -41,6 +41,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'owner', targetEntity: Hotel::class, cascade: ['persist', 'remove'])]
     private $hotel;
 
+    public function __toString()
+    {
+        return sprintf('%s %s', $this->firstname, $this->lastname);
+    }
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
