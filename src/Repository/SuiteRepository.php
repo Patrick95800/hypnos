@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Suite;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -27,5 +28,19 @@ class SuiteRepository extends ServiceEntityRepository
         if ($flush) {
             $this->_em->flush();
         }
+    }
+
+    public function findAllForManager(User $user)
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->innerJoin('s.hotel', 'h')
+            ->innerJoin('h.owner', 'u')
+            ->where('u.id = :owner_id')
+            ->setParameter('owner_id', $user->getId());
+
+        $query = $qb->getQuery();
+
+        return $query->execute();
+
     }
 }
