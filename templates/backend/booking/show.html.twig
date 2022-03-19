@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation #{{ booking.id }}{% endblock %}
+
+{% block body %}
+    <h1>Réservation #{{ booking.id }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ booking.id }}</td>
+            </tr>
+            <tr>
+                <th>Hôtel associé</th>
+                <td>
+                    <a href="{{ path('backend_hotel_show', {'id': booking.hotel.id}) }}">{{ booking.hotel }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Suite associée</th>
+                <td>
+                    <a href="{{ path('backend_suite_show', {'id': booking.suite.id}) }}">{{ booking.suite }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Client</th>
+                <td>
+                    <a href="{{ path('backend_user_show', {'id': booking.user.id}) }}">{{ booking.user }}</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Date de début de séjour</th>
+                <td>{{ booking.beginAt ? booking.beginAt|date('d/m/Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date de fin de séjour</th>
+                <td>{{ booking.endAt ? booking.endAt|date('d/m/Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>
+                    {% if booking.status == constant('App\\Entity\\Booking::STATUS_ACCEPTED') %}
+                        Acceptée
+                    {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_CANCELLED') %}
+                        Annulée
+                    {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_DECLINED') %}
+                        Refusée
+                    {% else %}
+                        En attente
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_booking_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('backend_booking_edit', {'id': booking.id}) }}">Editer</a>
+
+    {{ include('backend/booking/_delete_form.html.twig') }}
+{% endblock %}

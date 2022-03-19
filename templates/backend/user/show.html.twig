@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Utilisateur {{ user }}{% endblock %}
+
+{% block body %}
+    <h1>Utilisateur {{ user }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+            <tr>
+                <th>Adresse email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Rôles</th>
+                <td>
+                    {% for role in user.roles -%}
+                        {%- if role == constant('App\\Entity\\User::ROLE_ADMIN') -%}
+                            Administrateur
+                        {%- elseif role == constant('App\\Entity\\User::ROLE_MANAGER') -%}
+                            Gérant
+                        {%- elseif role == constant('App\\Entity\\User::ROLE_USER') -%}
+                            Client
+                        {%- endif -%}
+                        {%- if not loop.last %}, {% endif -%}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Hôtel associé</th>
+                <td>{{ user.hotel|default('Aucun') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_user_index') }}">Retour à la liste</a>
+
+    <a href="{{ path('backend_user_edit', {'id': user.id}) }}">Edition</a>
+
+    {{ include('backend/user/_delete_form.html.twig') }}
+{% endblock %}

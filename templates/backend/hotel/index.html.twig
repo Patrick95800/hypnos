@@ -1,43 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hotel index{% endblock %}
+{% block title %}Liste des hôtels{% endblock %}
 
 {% block body %}
-    <h1>Hotel index</h1>
+    <h1>Liste des hôtels</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Description</th>
                 <th>Slug</th>
-                <th>actions</th>
+                <th>Address</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for hotel in hotels %}
             <tr>
-                <td>{{ hotel.id }}</td>
                 <td>{{ hotel.name }}</td>
-                <td>{{ hotel.address }}</td>
-                <td>{{ hotel.city }}</td>
-                <td>{{ hotel.description }}</td>
                 <td>{{ hotel.slug }}</td>
+                <td>{{ hotel.address }}</td>
                 <td>
-                    <a href="{{ path('app_backend_hotel_show', {'id': hotel.id}) }}">show</a>
-                    <a href="{{ path('app_backend_hotel_edit', {'id': hotel.id}) }}">edit</a>
+                    <a href="{{ path('backend_hotel_show', {'id': hotel.id}) }}">Afficher</a>
+                    <a href="{{ path('backend_hotel_edit', {'id': hotel.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="4">Aucun hôtel trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_backend_hotel_new') }}">Create new</a>
+    <a href="{{ path('backend_hotel_new') }}">Créer un nouvel hôtel</a>
 {% endblock %}

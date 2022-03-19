@@ -34,6 +34,11 @@ class Suite
     #[ORM\JoinColumn(nullable: false)]
     private $hotel;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -71,6 +76,11 @@ class Suite
     public function getPrice(): ?int
     {
         return $this->price;
+    }
+
+    public function getPriceInEuros(): ?float
+    {
+        return $this->price / 100;
     }
 
     public function setPrice(int $price): self

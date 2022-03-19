@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edition de la réservation #{{ booking.id }}{% endblock %}
+
+{% block body %}
+    <h1>Edition de la réservation #{{ booking.id }}</h1>
+
+    {{ include('backend/booking/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <a href="{{ path('backend_booking_index') }}">Retour à la liste</a>
+
+    {{ include('backend/booking/_delete_form.html.twig') }}
+{% endblock %}

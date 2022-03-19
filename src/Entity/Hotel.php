@@ -40,6 +40,11 @@ class Hotel
     #[ORM\Column(type: 'string', length: 255)]
     private $slug;
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->bookings = new ArrayCollection();

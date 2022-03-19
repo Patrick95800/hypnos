@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des suites{% endblock %}
+
+{% block body %}
+    <h1>Liste des suites</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for suite in suites %}
+            <tr>
+                <td>{{ suite.title }}</td>
+                <td>{{ suite.priceInEuros }} €</td>
+                <td>
+                    <a href="{{ path('backend_suite_show', {'id': suite.id}) }}">Afficher</a>
+                    <a href="{{ path('backend_suite_edit', {'id': suite.id}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">Aucune suite trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_suite_new') }}">Créer une nouvelle suite</a>
+{% endblock %}

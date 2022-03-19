@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des réservations{% endblock %}
+
+{% block body %}
+    <h1>Liste des réservations</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Hôtel</th>
+                <th>Suite</th>
+                <th>Client</th>
+                <th>Date de début</th>
+                <th>Date de fin</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.id }}</td>
+                <td>
+                    <a href="{{ path('backend_hotel_show', {'id': booking.hotel.id}) }}">{{ booking.hotel }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('backend_suite_show', {'id': booking.suite.id}) }}">{{ booking.suite }}</a>
+                </td>
+                <td>
+                    <a href="{{ path('backend_user_show', {'id': booking.user.id}) }}">{{ booking.user }}</a>
+                </td>
+                <td>{{ booking.beginAt ? booking.beginAt|date('d/m/Y') : '' }}</td>
+                <td>{{ booking.endAt ? booking.endAt|date('d/m/Y') : '' }}</td>
+                <td>
+                    {% if booking.status == constant('App\\Entity\\Booking::STATUS_ACCEPTED') %}
+                        Acceptée
+                    {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_CANCELLED') %}
+                        Annulée
+                    {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_DECLINED') %}
+                        Refusée
+                    {% else %}
+                        En attente
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('backend_booking_show', {'id': booking.id}) }}">Afficher</a>
+                    <a href="{{ path('backend_booking_edit', {'id': booking.id}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucune réservation trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_booking_new') }}">Créer une nouvelle réservation</a>
+{% endblock %}

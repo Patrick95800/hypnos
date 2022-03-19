@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Adresse email</th>
+                <th>Rôles</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.firstname }}</td>
+                <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% for role in user.roles -%}
+                        {%- if role == constant('App\\Entity\\User::ROLE_ADMIN') -%}
+                            Administrateur
+                        {%- elseif role == constant('App\\Entity\\User::ROLE_MANAGER') -%}
+                            Gérant
+                        {%- elseif role == constant('App\\Entity\\User::ROLE_USER') -%}
+                            Client
+                        {%- endif -%}
+                        {%- if not loop.last %}, {% endif -%}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('backend_user_show', {'id': user.id}) }}">Afficher</a>
+                    <a href="{{ path('backend_user_edit', {'id': user.id}) }}">Editer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Aucun utilisateur trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('backend_user_new') }}">Créer un nouvel utilisateur</a>
+{% endblock %}

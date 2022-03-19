@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ hotel.name }}{% endblock %}
+{% block title %}Hôtel {{ hotel.name }}{% endblock %}
 
 {% block body %}
     <h1>
@@ -13,7 +13,7 @@
     {% for suite in hotel.suites %}
         <h2>{{ suite.title }}</h2>
         <p>{{ suite.description }}</p>
-        <p>{{ suite.price/100 }} €</p>
+        <p>{{ suite.priceInEuros }} €</p>
         <p><a href="{{ suite.bookingLink }}" target="_blank">Voir sur Booking.com</a></p>
     {% endfor %}
 {% endblock %}

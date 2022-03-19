@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Hotel{% endblock %}
+{% block title %}Création d'un nouvel hôtel{% endblock %}
 
 {% block body %}
-    <h1>Create new Hotel</h1>
+    <h1>Création d'un nouvel hôtel</h1>
 
     {{ include('backend/hotel/_form.html.twig') }}
 
-    <a href="{{ path('app_backend_hotel_index') }}">back to list</a>
+    <a href="{{ path('backend_hotel_index') }}">Retour à la liste</a>
 {% endblock %}

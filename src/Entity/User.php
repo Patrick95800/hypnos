@@ -14,6 +14,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     public const ROLE_ADMIN = 'ROLE_ADMIN'; // Administrateur
     public const ROLE_MANAGER = 'ROLE_MANAGER'; // Gérant
+    public const ROLE_USER = 'ROLE_USER'; // Client
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -85,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = self::ROLE_USER;
 
         return array_unique($roles);
     }
