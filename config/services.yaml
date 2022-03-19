@@ -4,7 +4,7 @@ services:
         autoconfigure: true
         bind:
             $defaultName: 'Hypnos'
-            $defaultEmail: 'contact@hypnos.com'
+            $defaultEmail: 'patrick.barros.85@gmail.com'
 
     App\:
         resource: '../src/'
