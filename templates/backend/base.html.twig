@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title '' %} - Administration Hypnos</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <section>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                <p>
+                    Connecté en tant que <strong>{{ app.user }}</strong>.
+                    <a href="{{ path('logout') }}">Déconnexion</a>
+                </p>
+            {% else %}
+                <p>
+                    <a href="{{ path('login') }}">Connexion</a>
+                    <a href="{{ path('register') }}">Inscription</a>
+                </p>
+            {% endif %}
+        </section>
+        <ul>
+            {% if is_granted(constant('App\\Entity\\User::ROLE_ADMIN')) %}
+                <li><a href="{{ path('backend_hotel_index') }}">Établissements</a></li>
+            {% endif %}
+
+            {% if is_granted(constant('App\\Entity\\User::ROLE_MANAGER')) %}
+                <li><a href="{{ path('backend_suite_index') }}">Suites</a></li>
+            {% endif %}
+
+            {% if is_granted(constant('App\\Entity\\User::ROLE_MANAGER')) %}
+                <li><a href="{{ path('backend_booking_index') }}">Réservations</a></li>
+            {% endif %}
+
+            {% if is_granted(constant('App\\Entity\\User::ROLE_ADMIN')) %}
+                <li><a href="{{ path('backend_user_index') }}">Utilisateurs</a></li>
+            {% endif %}
+        </ul>
+        {% block body %}{% endblock %}
+    </body>
+</html>

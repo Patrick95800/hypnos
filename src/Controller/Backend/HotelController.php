@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/hotels')]
+#[Route('/admin/etablissements')]
 class HotelController extends AbstractController
 {
     #[Route('/', name: 'backend_hotel_index', methods: ['GET'])]
