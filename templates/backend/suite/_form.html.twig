@@ -1,4 +1,25 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
+
+	{% if app.request.attributes.get('_route') == 'backend_suite_edit' %}
+        {% if suite.featuredImage is defined and suite.featuredImage %}
+            <h2>Image principale</h2>
+            <div>
+                <img src="{{ asset('/uploads/' ~ suite.featuredImage.name) }}" alt="" width="150">
+                <a href="{{ path('backend_suite_delete_image', { id: suite.id, imageId: suite.featuredImage.id }) }}" data-delete data-token="{{ csrf_token('delete' ~ suite.featuredImage.id )}}">Supprimer</a>
+            </div>
+        {% endif %}
+
+        {% if suite.images|length > 0 %}
+            <h2>Galerie d'images</h2>
+            {% for image in suite.images %}
+                <div>
+                    <img src="{{ asset('/uploads/' ~ image.name) }}" alt="" width="150">
+                    <a href="{{ path('backend_suite_delete_image', { id: suite.id, imageId: image.id }) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id )}}">Supprimer</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+
     <button class="btn">{{ button_label|default('Sauvegarder') }}</button>
 {{ form_end(form) }}

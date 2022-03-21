@@ -11,3 +11,36 @@
 
     {{ include('backend/suite/_delete_form.html.twig') }}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        window.onload = () => {
+            let deletionLinks = document.querySelectorAll("[data-delete]")
+
+            for (let deletionLink of deletionLinks) {
+                deletionLink.addEventListener("click", function(e){
+                    e.preventDefault()
+
+                    if (confirm('Etes-vous sûr de vouloir supprimer cette image ?')) {
+                        fetch(this.getAttribute('href'), {
+                            method: 'DELETE',
+                            headers: {
+                                "X-Requested-With": "XMLHttpRequest",
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({'_token': this.dataset.token})
+                        }).then(
+                            response => response.json()
+                        ).then(data => {
+                            if (data.success)
+                                this.parentElement.remove()
+                            else
+                                alert("Une erreur est survenue lors de la suppression de l'image")
+                        }).catch(e => alert(e))
+                    }
+                })
+            }
+        }
+    </script>
+{% endblock %}

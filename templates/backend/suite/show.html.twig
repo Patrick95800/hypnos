@@ -12,6 +12,28 @@
                 <td>{{ suite.title }}</td>
             </tr>
             <tr>
+                <th>Image principale</th>
+                <td>
+                    {% if suite.featuredImage is defined and suite.featuredImage %}
+                        <img src="{{ asset('/uploads/' ~ suite.featuredImage.name) }}" alt="" width="150">
+                    {% else %}
+                        Aucune
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Images</th>
+                <td>
+                    {% if suite.images|length > 0 %}
+                        {% for image in suite.images %}
+                            <img src="{{ asset('/uploads/' ~ image.name) }}" alt="" width="150">
+                        {% endfor %}
+                    {% else %}
+                        Aucune
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
                 <th>Description</th>
                 <td>{{ suite.description }}</td>
             </tr>

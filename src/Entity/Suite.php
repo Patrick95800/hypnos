@@ -34,6 +34,12 @@ class Suite
     #[ORM\JoinColumn(nullable: false)]
     private $hotel;
 
+    #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'])]
+    private $featuredImage;
+
+    #[ORM\OneToMany(mappedBy: 'suite', targetEntity: Image::class)]
+    private $images;
+
     public function __toString()
     {
         return $this->title;
@@ -42,6 +48,7 @@ class Suite
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,6 +147,48 @@ class Suite
     public function setHotel(?Hotel $hotel): self
     {
         $this->hotel = $hotel;
+
+        return $this;
+    }
+
+    public function getFeaturedImage(): ?Image
+    {
+        return $this->featuredImage;
+    }
+
+    public function setFeaturedImage(?Image $featuredImage): self
+    {
+        $this->featuredImage = $featuredImage;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setSuite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getSuite() === $this) {
+                $image->setSuite(null);
+            }
+        }
 
         return $this;
     }
