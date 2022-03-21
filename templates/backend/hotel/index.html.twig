@@ -1,9 +1,9 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Liste des hôtels{% endblock %}
+{% block title %}Liste des établissements{% endblock %}
 
 {% block body %}
-    <h1>Liste des hôtels</h1>
+    <h1>Liste des établissements</h1>
 
     <table class="table">
         <thead>
@@ -27,11 +27,11 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">Aucun hôtel trouvé</td>
+                <td colspan="4">Aucun établissement trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('backend_hotel_new') }}">Créer un nouvel hôtel</a>
+    <a href="{{ path('backend_hotel_new') }}">Créer un nouvel établissement</a>
 {% endblock %}

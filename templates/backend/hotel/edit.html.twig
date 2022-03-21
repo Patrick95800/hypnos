@@ -1,9 +1,9 @@
 {% extends 'backend/base.html.twig' %}
 
-{% block title %}Edition de l'hôtel {{ hotel.name }}{% endblock %}
+{% block title %}Edition de l'établissement {{ hotel.name }}{% endblock %}
 
 {% block body %}
-    <h1>Edition de l'hôtel {{ hotel.name }}</h1>
+    <h1>Edition de l'établissement {{ hotel.name }}</h1>
 
     {{ include('backend/hotel/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
