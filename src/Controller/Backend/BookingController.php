@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/reservations')]
 class BookingController extends AbstractController
 {
-    #[Route('/', name: 'backend_booking_index', methods: ['GET'])]
+    #[Route('/', name: 'backend_bookings', methods: ['GET'])]
     public function index(BookingRepository $bookingRepository): Response
     {
         return $this->render('backend/booking/index.html.twig', [
@@ -30,7 +30,7 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bookingRepository->add($booking);
-            return $this->redirectToRoute('backend_booking_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_bookings', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/booking/new.html.twig', [
@@ -55,7 +55,7 @@ class BookingController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $bookingRepository->add($booking);
-            return $this->redirectToRoute('backend_booking_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_bookings', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/booking/edit.html.twig', [
@@ -71,6 +71,6 @@ class BookingController extends AbstractController
             $bookingRepository->remove($booking);
         }
 
-        return $this->redirectToRoute('backend_booking_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('backend_bookings', [], Response::HTTP_SEE_OTHER);
     }
 }

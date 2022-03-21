@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/etablissements')]
 class HotelController extends AbstractController
 {
-    #[Route('/', name: 'backend_hotel_index', methods: ['GET'])]
+    #[Route('/', name: 'backend_hotels', methods: ['GET'])]
     public function index(HotelRepository $hotelRepository): Response
     {
         return $this->render('backend/hotel/index.html.twig', [
@@ -30,7 +30,7 @@ class HotelController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $hotelRepository->add($hotel);
-            return $this->redirectToRoute('backend_hotel_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_hotels', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/hotel/new.html.twig', [
@@ -55,7 +55,7 @@ class HotelController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $hotelRepository->add($hotel);
-            return $this->redirectToRoute('backend_hotel_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_hotels', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/hotel/edit.html.twig', [
@@ -71,6 +71,6 @@ class HotelController extends AbstractController
             $hotelRepository->remove($hotel);
         }
 
-        return $this->redirectToRoute('backend_hotel_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('backend_hotels', [], Response::HTTP_SEE_OTHER);
     }
 }

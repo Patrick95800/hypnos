@@ -28,19 +28,19 @@
         </section>
         <ul>
             {% if is_granted(constant('App\\Entity\\User::ROLE_ADMIN')) %}
-                <li><a href="{{ path('backend_hotel_index') }}">Établissements</a></li>
+                <li><a href="{{ path('backend_hotels') }}">Établissements</a></li>
             {% endif %}
 
             {% if is_granted(constant('App\\Entity\\User::ROLE_MANAGER')) %}
-                <li><a href="{{ path('backend_suite_index') }}">Suites</a></li>
+                <li><a href="{{ path('backend_suites') }}">Suites</a></li>
             {% endif %}
 
             {% if is_granted(constant('App\\Entity\\User::ROLE_MANAGER')) %}
-                <li><a href="{{ path('backend_booking_index') }}">Réservations</a></li>
+                <li><a href="{{ path('backend_bookings') }}">Réservations</a></li>
             {% endif %}
 
             {% if is_granted(constant('App\\Entity\\User::ROLE_ADMIN')) %}
-                <li><a href="{{ path('backend_user_index') }}">Utilisateurs</a></li>
+                <li><a href="{{ path('backend_users') }}">Utilisateurs</a></li>
             {% endif %}
         </ul>
         {% block body %}{% endblock %}

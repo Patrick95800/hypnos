@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes réservations{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Hôtel</th>
+            <th>Suite</th>
+            <th>Date de début de séjour</th>
+            <th>Date de fin de séjour</th>
+            <th>Statut de la commande</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.hotel }}</td>
+                    <td>{{ booking.suite }}</td>
+                    <td>{{ booking.beginAt|date('d/m/Y') }}</td>
+                    <td>{{ booking.endAt|date('d/m/Y') }}</td>
+                    <td>
+                        {% if booking.status == constant('App\\Entity\\Booking::STATUS_ACCEPTED') %}
+                            Acceptée
+                        {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_CANCELLED') %}
+                            Annulée
+                        {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_DECLINED') %}
+                            Refusée
+                        {% else %}
+                            En attente
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucune réservation trouvée</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

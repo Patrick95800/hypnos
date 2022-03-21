@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/utilisateurs')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'backend_user_index', methods: ['GET'])]
+    #[Route('/', name: 'backend_users', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('backend/user/index.html.twig', [
@@ -38,7 +38,7 @@ class UserController extends AbstractController
             }
 
             $userRepository->add($user);
-            return $this->redirectToRoute('backend_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_users', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/user/new.html.twig', [
@@ -70,7 +70,7 @@ class UserController extends AbstractController
             }
 
             $userRepository->add($user);
-            return $this->redirectToRoute('backend_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_users', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/user/edit.html.twig', [
@@ -86,6 +86,6 @@ class UserController extends AbstractController
             $userRepository->remove($user);
         }
 
-        return $this->redirectToRoute('backend_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('backend_users', [], Response::HTTP_SEE_OTHER);
     }
 }

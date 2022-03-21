@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/admin/suites')]
 class SuiteController extends AbstractController
 {
-    #[Route('/', name: 'backend_suite_index', methods: ['GET'])]
+    #[Route('/', name: 'backend_suites', methods: ['GET'])]
     public function index(SuiteRepository $suiteRepository): Response
     {
         return $this->render('backend/suite/index.html.twig', [
@@ -62,7 +62,7 @@ class SuiteController extends AbstractController
             }
 
             $suiteRepository->add($suite);
-            return $this->redirectToRoute('backend_suite_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_suites', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/suite/new.html.twig', [
@@ -75,7 +75,7 @@ class SuiteController extends AbstractController
     public function show(Suite $suite): Response
     {
         if ($suite->getHotel()->getOwner() != $this->getUser()) {
-            return $this->redirectToRoute('backend_suite_index', [], Response::HTTP_FORBIDDEN);
+            return $this->redirectToRoute('backend_suites', [], Response::HTTP_FORBIDDEN);
         }
 
         return $this->render('backend/suite/show.html.twig', [
@@ -87,7 +87,7 @@ class SuiteController extends AbstractController
     public function edit(Request $request, Suite $suite, SuiteRepository $suiteRepository, ImageRepository $imageRepository): Response
     {
         if ($suite->getHotel()->getOwner() != $this->getUser()) {
-            return $this->redirectToRoute('backend_suite_index', [], Response::HTTP_FORBIDDEN);
+            return $this->redirectToRoute('backend_suites', [], Response::HTTP_FORBIDDEN);
         }
 
         $form = $this->createForm(SuiteType::class, $suite);
@@ -123,7 +123,7 @@ class SuiteController extends AbstractController
             }
 
             $suiteRepository->add($suite);
-            return $this->redirectToRoute('backend_suite_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('backend_suites', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('backend/suite/edit.html.twig', [
@@ -136,14 +136,14 @@ class SuiteController extends AbstractController
     public function delete(Request $request, Suite $suite, SuiteRepository $suiteRepository): Response
     {
         if ($suite->getHotel()->getOwner() != $this->getUser()) {
-            return $this->redirectToRoute('backend_suite_index', [], Response::HTTP_FORBIDDEN);
+            return $this->redirectToRoute('backend_suites', [], Response::HTTP_FORBIDDEN);
         }
 
         if ($this->isCsrfTokenValid('delete'.$suite->getId(), $request->request->get('_token'))) {
             $suiteRepository->remove($suite);
         }
 
-        return $this->redirectToRoute('backend_suite_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('backend_suites', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/image/{imageId}', name: 'backend_suite_delete_image', methods: ['DELETE'])]

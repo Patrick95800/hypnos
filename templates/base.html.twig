@@ -19,6 +19,9 @@
                     Connecté en tant que <strong>{{ app.user }}</strong>.
                     <a href="{{ path('logout') }}">Déconnexion</a>
                 </p>
+                <ul>
+                    <li><a href="{{ path('bookings') }}">Mes réservations</a></li>
+                </ul>
             {% else %}
                 <p>
                     <a href="{{ path('login') }}">Connexion</a>
