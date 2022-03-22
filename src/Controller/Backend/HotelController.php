@@ -3,7 +3,7 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Hotel;
-use App\Form\HotelType;
+use App\Form\Backend\HotelType;
 use App\Repository\HotelRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

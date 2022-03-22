@@ -3,7 +3,7 @@
 namespace App\Controller\Backend;
 
 use App\Entity\Booking;
-use App\Form\BookingType;
+use App\Form\Backend\BookingType;
 use App\Repository\BookingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

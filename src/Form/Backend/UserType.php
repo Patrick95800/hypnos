@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Backend;
 
 use App\Entity\Booking;
 use App\Entity\Hotel;

@@ -4,7 +4,7 @@ namespace App\Controller\Backend;
 
 use App\Entity\Image;
 use App\Entity\Suite;
-use App\Form\SuiteType;
+use App\Form\Backend\SuiteType;
 use App\Repository\ImageRepository;
 use App\Repository\SuiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
