@@ -12,6 +12,7 @@ class Booking
     const STATUS_DECLINED = 'declined';
     const STATUS_CANCELLED = 'cancelled';
     const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_DONE = 'done';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -113,5 +114,17 @@ class Booking
         $this->status = $status;
 
         return $this;
+    }
+
+    public function isAllowedToCancel(): bool
+    {
+        $now = new \DateTimeImmutable();
+        $diffInDays = (int) $now->diff($this->getBeginAt())->format("%r%a");
+
+        if ($this->getStatus() === self::STATUS_ACCEPTED && $diffInDays >= 3) {
+            return true;
+        }
+
+        return false;
     }
 }

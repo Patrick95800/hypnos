@@ -71,6 +71,7 @@ class BookingType extends AbstractType
                     'En attente de paiement' => Booking::STATUS_IN_PROGRESS,
                     'Paiement accepté' => Booking::STATUS_ACCEPTED,
                     'Paiement refusé' => Booking::STATUS_DECLINED,
+                    'Terminée' => Booking::STATUS_DONE,
                     'Annulée' => Booking::STATUS_CANCELLED,
                 ]
             ])

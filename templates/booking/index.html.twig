@@ -23,6 +23,9 @@
                     <td>
                         {% if booking.status == constant('App\\Entity\\Booking::STATUS_ACCEPTED') %}
                             Acceptée
+                            {% if booking.isAllowedToCancel() %}
+                                <a href="{{ path('booking_cancel', {'id': booking.id}) }}">Annuler</a>
+                            {% endif %}
                         {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_CANCELLED') %}
                             Annulée
                         {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_DECLINED') %}
