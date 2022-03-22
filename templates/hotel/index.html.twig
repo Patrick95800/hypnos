@@ -10,6 +10,8 @@
     <p>Adresse complete: {{ hotel.address }}</p>
     <p>Ville: {{ hotel.city }}</p>
 
+    <p><a href="{{ path('booking_new', { 'hotel_id': hotel.id }) }}">Réserver dans cet hôtel</a></p>
+
     {% for suite in hotel.suites %}
         {% if suite.featuredImage is defined and suite.featuredImage %}
             <img src="{{ asset('/uploads/' ~ suite.featuredImage.name) }}" alt="" width="150">
@@ -25,5 +27,7 @@
                 <img src="{{ asset('/uploads/' ~ image.name) }}" alt="" width="150">
             {% endfor %}
         {% endif %}
+
+        <p><a href="{{ path('booking_new', { 'suite_id': suite.id }) }}">Réserver cette suite</a></p>
     {% endfor %}
 {% endblock %}

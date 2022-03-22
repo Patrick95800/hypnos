@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de votre réservation{% endblock %}
+
+{% block body %}
+    <h1>Merci de votre réservation !</h1>
+
+    <p>Pour rappel, vous avez réservé une suite <strong>{{ booking.suite }}</strong> à l'hôtel <strong>{{ booking.hotel }}</strong>, du {{ booking.beginAt|date('d/m/Y') }} au {{ booking.endAt|date('d/m/Y') }}</p>
+
+    <p><a href="{{ path('bookings') }}">Voir mes réservations</a></p>
+{% endblock %}

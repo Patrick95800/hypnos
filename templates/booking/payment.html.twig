@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block body %}
+    <h1>Paiement</h1>
+
+    <form method="post" action="{{ path('booking_payment') }}">
+        <p>Attention : aucun moyen de paiement ne sera réellement débité.</p>
+        <button type="submit">Payer</button>
+    </form>
+{% endblock %}

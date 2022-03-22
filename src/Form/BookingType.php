@@ -1,15 +1,13 @@
 <?php
 
-namespace App\Form\Backend;
+namespace App\Form;
 
 use App\Entity\Booking;
 use App\Entity\Hotel;
 use App\Entity\Suite;
-use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +26,7 @@ class BookingType extends AbstractType
                         ->orderBy('h.name', 'ASC');
                 },
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner l\'hôtel associé'])
+                    new NotBlank(['message' => 'Veuillez sélectionner l\'hôtel pour lequel vous souhaitez réserver'])
                 ]
             ])
             ->add('suite', EntityType::class, [
@@ -39,42 +37,21 @@ class BookingType extends AbstractType
                         ->orderBy('s.title', 'ASC');
                 },
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner la suite associée'])
-                ]
-            ])
-            ->add('user', EntityType::class, [
-                'label' => 'Client associé',
-                'class' => User::class,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.lastname', 'ASC');
-                },
-                'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner le client associé'])
+                    new NotBlank(['message' => 'Veuillez sélectionner la suite que vous souhaitez réserver'])
                 ]
             ])
             ->add('begin_at', DateType::class, [
                 'label' => 'Date de début de séjour',
                 'input' => 'datetime_immutable',
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner la date de début de séjour'])
+                    new NotBlank(['message' => 'Veuillez sélectionner votre date de début de séjour souhaitée'])
                 ]
             ])
             ->add('end_at', DateType::class, [
                 'label' => 'Date de fin de séjour',
                 'input' => 'datetime_immutable',
                 'constraints' => [
-                    new NotBlank(['message' => 'Veuillez sélectionner la date de fin de séjour'])
-                ]
-            ])
-            ->add('status', ChoiceType::class, [
-                'label' => 'Statut',
-                'choices' => [
-                    'En attente de paiement' => Booking::STATUS_IN_PROGRESS,
-                    'Paiement accepté' => Booking::STATUS_ACCEPTED,
-                    'Paiement refusé' => Booking::STATUS_DECLINED,
-                    'Terminée' => Booking::STATUS_DONE,
-                    'Annulée' => Booking::STATUS_CANCELLED,
+                    new NotBlank(['message' => 'Veuillez sélectionner votre date de fin de séjour souhaitée'])
                 ]
             ])
         ;

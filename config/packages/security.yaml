@@ -31,6 +31,8 @@ security:
         - { path: ^/admin/suites, roles: ROLE_MANAGER }
         - { path: ^/admin/reservations, roles: ROLE_MANAGER }
         - { path: ^/mon-compte, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/reservation/paiement, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: ^/reservation/confirmation, roles: IS_AUTHENTICATED_REMEMBERED }
         - { path: ^/, roles: PUBLIC_ACCESS }
 
 when@test:
