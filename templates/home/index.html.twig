@@ -3,16 +3,36 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <h1>Venez passer une nuit de rêves dans l'un de nos hotels</h1>
+    <div class="custom-banner py-md-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Hypnos</h1>
+                <p class="lead fw-normal mb-0">Une expérience romantique inoubliable</p>
+            </div>
+        </div>
+    </div>
 
     {% for hotel in hotels %}
-        <h2>
-            <a href="{{ path('hotel', {'slug': hotel.slug}) }}">{{ hotel.name }}</a>
-        </h2>
-        <p>Description: {{ hotel.description }}</p>
-        <p>Adresse complete: {{ hotel.address }}</p>
-        <p>Ville: {{ hotel.city }}</p>
+        <div class="custom-hotel-list">
+            <div row mt-5 mb-5>
+            <div class="card" >
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{{ path('hotel', {'slug': hotel.slug}) }}">{{ hotel.name }}</a>
+                    </h5>
+                    <p class="card-text">{{ hotel.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ hotel.address }}</li>
+                    <li class="list-group-item">{{ hotel.city }}</li>
+                    <li class="list-group-item">
+                        <a href="{{ path('booking_new', { 'hotel_id': hotel.id }) }}" class="btn btn-primary" role="button">Réserver dans cet hôtel</a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </div>
 
-        <p><a href="{{ path('booking_new', { 'hotel_id': hotel.id }) }}">Réserver dans cet hôtel</a></p>
     {% endfor %}
 {% endblock %}

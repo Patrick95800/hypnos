@@ -8,6 +8,80 @@
     {{ form_start(form) }}
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn">Continuer</button>
+        <button type="submit" class="btn btn-primary">Continuer</button>
     {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function(){
+            const $form = $('form[name=booking]');
+            const $hotel = $('#booking_hotel');
+            const $beginAtDay = $('#booking_beginAt_day');
+            const $beginAtMonth = $('#booking_beginAt_month');
+            const $beginAtYear = $('#booking_beginAt_year');
+            const $endAtDay = $('#booking_endAt_day');
+            const $endAtMonth = $('#booking_endAt_month');
+            const $endAtYear = $('#booking_endAt_year');
+            const $suite = $('#booking_suite');
+
+            $hotel.change(function() {
+                var data = {};
+                data[$hotel.attr('name')] = $hotel.val();
+                data[$beginAtDay.attr('name')] = $beginAtDay.val();
+                data[$beginAtMonth.attr('name')] = $beginAtMonth.val();
+                data[$beginAtYear.attr('name')] = $beginAtYear.val();
+                data[$endAtDay.attr('name')] = $endAtDay.val();
+                data[$endAtMonth.attr('name')] = $endAtMonth.val();
+                data[$endAtYear.attr('name')] = $endAtYear.val();
+
+                $.ajax({
+                    url: $form.attr('action'),
+                    type: $form.attr('method'),
+                    data: data,
+                    complete: function(html) {
+                        $('#booking_suite').replaceWith(
+                            $(html.responseText).find('#booking_suite')
+                        );
+                    }
+                });
+            });
+
+            $form.on('submit', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (!$hotel.val() || !$suite.val()
+                    || !$beginAtDay.val() || !$beginAtMonth.val() || !$beginAtYear.val()
+                    || !$endAtDay.val() || !$endAtMonth.val() || !$endAtYear.val()) {
+                    alert('Veuillez remplir tous les champs.')
+                }
+
+                var data = {};
+                data[$hotel.attr('name')] = $hotel.val();
+                data[$suite.attr('name')] = $suite.val();
+                data[$beginAtDay.attr('name')] = $beginAtDay.val();
+                data[$beginAtMonth.attr('name')] = $beginAtMonth.val();
+                data[$beginAtYear.attr('name')] = $beginAtYear.val();
+                data[$endAtDay.attr('name')] = $endAtDay.val();
+                data[$endAtMonth.attr('name')] = $endAtMonth.val();
+                data[$endAtYear.attr('name')] = $endAtYear.val();
+
+                $.ajax({
+                    url: '{{ path('booking_check_availability') }}',
+                    type: $form.attr('method'),
+                    data: data,
+                    complete: function(data) {
+                        let json = JSON.parse(data.responseText);
+                        if (json.status === 'OK') {
+                            $form.off('submit').submit();
+                        } else {
+                            alert("Cette suite n'est pas disponible sur cette date, veuillez sélectionner une autre date.")
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 {% endblock %}

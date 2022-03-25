@@ -34,8 +34,8 @@
                     {% endfor %}
                 </td>
                 <td>
-                    <a href="{{ path('backend_user_show', {'id': user.id}) }}">Afficher</a>
-                    <a href="{{ path('backend_user_edit', {'id': user.id}) }}">Editer</a>
+                    <a href="{{ path('backend_user_show', {'id': user.id}) }}" class="btn btn-primary" role="button">Afficher</a>
+                    <a href="{{ path('backend_user_edit', {'id': user.id}) }}" class="btn btn-primary" role="button"    >Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -46,5 +46,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('backend_user_new') }}">Créer un nouvel utilisateur</a>
+    <a href="{{ path('backend_user_new') }}" class="btn btn-primary" role="button">Créer un nouvel utilisateur</a>
 {% endblock %}

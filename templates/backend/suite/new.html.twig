@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Création d'une nouvelle suite</h1>
 
-    {{ include('backend/suite/_form.html.twig') }}
+    <p>{{ include('backend/suite/_form.html.twig') }}</p>
 
-    <a href="{{ path('backend_suites') }}">Retour à la liste</a>
+    <p><a href="{{ path('backend_suites') }}" class="btn btn-primary" role="button">Retour à la liste</a></p>
 {% endblock %}

@@ -45,8 +45,8 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('backend_booking_show', {'id': booking.id}) }}">Afficher</a>
-                    <a href="{{ path('backend_booking_edit', {'id': booking.id}) }}">Editer</a>
+                    <a href="{{ path('backend_booking_show', {'id': booking.id}) }}" class="btn btn-primary" role="button">Afficher</a>
+                    <a href="{{ path('backend_booking_edit', {'id': booking.id}) }}" class="btn btn-primary" role="button">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -57,5 +57,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('backend_booking_new') }}">Créer une nouvelle réservation</a>
+    <a href="{{ path('backend_booking_new') }}" class="btn btn-primary" role="button">Créer une nouvelle réservation</a>
 {% endblock %}

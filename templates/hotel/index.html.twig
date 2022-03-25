@@ -10,7 +10,7 @@
     <p>Adresse complete: {{ hotel.address }}</p>
     <p>Ville: {{ hotel.city }}</p>
 
-    <p><a href="{{ path('booking_new', { 'hotel_id': hotel.id }) }}">Réserver dans cet hôtel</a></p>
+    <p><a href="{{ path('booking_new', { 'hotel_id': hotel.id }) }}" class="btn btn-primary" role="button">Réserver dans cet hôtel</a></p>
 
     {% for suite in hotel.suites %}
         {% if suite.featuredImage is defined and suite.featuredImage %}
@@ -20,7 +20,7 @@
         <h2>{{ suite.title }}</h2>
         <p>{{ suite.description }}</p>
         <p>{{ suite.priceInEuros }} €</p>
-        <p><a href="{{ suite.bookingLink }}" target="_blank">Voir sur Booking.com</a></p>
+        <p><a href="{{ suite.bookingLink }}" target="_blank" class="btn btn-primary" role="button">Voir sur Booking.com</a></p>
 
         {% if suite.images|length() > 0 %}
             {% for image in suite.images %}
@@ -28,6 +28,6 @@
             {% endfor %}
         {% endif %}
 
-        <p><a href="{{ path('booking_new', { 'suite_id': suite.id }) }}">Réserver cette suite</a></p>
+        <p><a href="{{ path('booking_new', { 'suite_id': suite.id }) }}" class="btn btn-primary" role="button">Réserver cette suite</a></p>
     {% endfor %}
 {% endblock %}

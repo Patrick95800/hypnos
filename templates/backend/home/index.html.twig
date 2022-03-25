@@ -3,5 +3,30 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <h1>Bienvenue dans l'espace d'administration du groupe Hypnos</h1>
+    <div class="custom-banner py-md-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Administration Hypnos</h1>
+                <p class="lead fw-normal text-white-50 mb-0">Espace de gestion</p>
+            </div>
+        </div>
+    </div>
+    <div>
+        {% if is_granted(constant('App\\Entity\\User::ROLE_MANAGER')) %}
+            <br>
+            <p>En tant que gérant.e vous avez la possibilité de :</p>
+            <ul>
+                <li>Afficher, éditer, ajouter des suites à votre établissement.</li>
+                <li>Afficher, éditer, ajouter des réservations à votre établissement.</li>
+            </ul>
+        {% endif %}
+        {% if is_granted(constant('App\\Entity\\User::ROLE_ADMIN')) %}
+            <br>
+            <p>En tant qu'administrateur.trice vous avez la possibilité de :</p>
+            <ul>
+                <li>Afficher, éditer, ajouter des utilisateurs.</li>
+                <li>Afficher, éditer, ajouter des établissements.</li>
+            </ul>
+        {% endif %}
+    </div>
 {% endblock %}

@@ -1,0 +1,62 @@
+@font-face {
+    font-family: "Lato";
+    src: url('https://fonts.googleapis.com/css2?family=Lato&family=Signika:wght@300&display=swap');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* signika-regular - latin */
+@font-face {
+    font-family: 'Signika';
+    font-style: normal;
+    font-weight: 400;
+    src: url('https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap'); /* Google font */
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+
+}
+
+.navbar {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    background-color:#D0D3D4 ;
+    color: red;
+}
+
+.btn{
+    background-color: #1C1F2A;
+    border-color: #1C1F2A;
+    color:white;
+    padding-top: 5px;
+}
+
+.common-nav{
+    background-color: #D0D3D4;
+
+}
+
+div.custom-banner{
+    background: #1C1F2A;
+}
+
+
+
+.form{
+    margin : 100px;
+}
+
+footer{
+    background: #1C1F2A;
+    color: #1C1F2A;
+    margin-top: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+
+}
