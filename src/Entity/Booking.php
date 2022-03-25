@@ -28,16 +28,19 @@ class Booking
     private $suite;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $begin_at;
+    private $beginAt;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $end_at;
+    private $endAt;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'bookings')]
     private $user;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $status = self::STATUS_IN_PROGRESS;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $totalPrice;
 
     public function getId(): ?int
     {
@@ -70,24 +73,24 @@ class Booking
 
     public function getBeginAt(): ?\DateTimeImmutable
     {
-        return $this->begin_at;
+        return $this->beginAt;
     }
 
-    public function setBeginAt(\DateTimeImmutable $begin_at): self
+    public function setBeginAt(\DateTimeImmutable $beginAt): self
     {
-        $this->begin_at = $begin_at;
+        $this->beginAt = $beginAt;
 
         return $this;
     }
 
     public function getEndAt(): ?\DateTimeImmutable
     {
-        return $this->end_at;
+        return $this->endAt;
     }
 
-    public function setEndAt(\DateTimeImmutable $end_at): self
+    public function setEndAt(\DateTimeImmutable $endAt): self
     {
-        $this->end_at = $end_at;
+        $this->endAt = $endAt;
 
         return $this;
     }
@@ -118,6 +121,10 @@ class Booking
 
     public function isAllowedToCancel(): bool
     {
+        if (null === $this->getBeginAt()) {
+            return false;
+        }
+
         $now = new \DateTimeImmutable();
         $diffInDays = (int) $now->diff($this->getBeginAt())->format("%r%a");
 
@@ -126,5 +133,33 @@ class Booking
         }
 
         return false;
+    }
+
+    public function getNightsNumber(): int
+    {
+        if (null === $this->getBeginAt() || null === $this->getEndAt()) {
+            return false;
+        }
+
+        $diffInDays = (int) $this->getBeginAt()->diff($this->getEndAt())->format("%r%a");
+
+        return ($diffInDays > 0) ? $diffInDays : 0;
+    }
+
+    public function getTotalPrice(): ?int
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(?int $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    public function getTotalPriceInEuros(): ?float
+    {
+        return $this->totalPrice / 100;
     }
 }

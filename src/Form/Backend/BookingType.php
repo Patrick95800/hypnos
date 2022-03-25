@@ -53,14 +53,14 @@ class BookingType extends AbstractType
                     new NotBlank(['message' => 'Veuillez sélectionner le client associé'])
                 ]
             ])
-            ->add('begin_at', DateType::class, [
+            ->add('beginAt', DateType::class, [
                 'label' => 'Date de début de séjour',
                 'input' => 'datetime_immutable',
                 'constraints' => [
                     new NotBlank(['message' => 'Veuillez sélectionner la date de début de séjour'])
                 ]
             ])
-            ->add('end_at', DateType::class, [
+            ->add('endAt', DateType::class, [
                 'label' => 'Date de fin de séjour',
                 'input' => 'datetime_immutable',
                 'constraints' => [

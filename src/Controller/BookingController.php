@@ -10,6 +10,7 @@ use App\Repository\BookingRepository;
 use App\Repository\HotelRepository;
 use App\Repository\SuiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,6 +26,8 @@ class BookingController extends AbstractController
     ): Response
     {
         $booking = new Booking();
+        $booking->setBeginAt(new \DateTimeImmutable('now'));
+        $booking->setEndAt(new \DateTimeImmutable('+2 days'));
 
         if ($request->query->has('hotel_id') && null !== $hotelId = $request->query->get('hotel_id')) {
             $hotel = $hotelRepository->find($hotelId);
@@ -43,10 +46,13 @@ class BookingController extends AbstractController
             }
         }
 
-        $form = $this->createForm(BookingType::class, $booking);
+        $form = $this->createForm(BookingType::class, $booking, ['suites' => $suiteRepository->findAll()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $totalPrice = $booking->getSuite()->getPrice() * $booking->getNightsNumber();
+            $booking->setTotalPrice($totalPrice);
+
             $bookingRepository->add($booking);
 
             $request->getSession()->set('current_booking', $booking->getId());
@@ -57,6 +63,18 @@ class BookingController extends AbstractController
         return $this->renderForm('booking/new.html.twig', [
             'booking' => $booking,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/reservation/verification-disponibilite', name: 'booking_check_availability', methods: 'POST')]
+    public function checkAvailability(Request $request, BookingRepository $bookingRepository): JsonResponse
+    {
+        $booking = $request->request->all()['booking'];
+
+        $existingBooking = $bookingRepository->findExistingBookings($booking);
+
+        return new JsonResponse([
+            'status' => empty($existingBooking) ? 'OK' : 'KO'
         ]);
     }
 
