@@ -14,9 +14,7 @@
 
     {% for hotel in hotels %}
         <div class="custom-hotel-list">
-            <div row mt-5 mb-5>
             <div class="card" >
-                <img class="card-img-top" src="..." alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="{{ path('hotel', {'slug': hotel.slug}) }}">{{ hotel.name }}</a>
@@ -30,7 +28,6 @@
                         <a href="{{ path('booking_new', { 'hotel_id': hotel.id }) }}" class="btn btn-primary" role="button">Réserver dans cet hôtel</a>
                     </li>
                 </ul>
-            </div>
             </div>
         </div>
 

@@ -63,10 +63,10 @@
             </nav>
         </section>
         {% block body %}{% endblock %}
+        <footer>
+            {% block footer %}
+                <div class="container"><p class="text-center text-white">Copyright &copy; Hypnos 2022</p></div>
+            {% endblock %}
+        </footer>
     </body>
-    <footer>
-        {% block footer %}
-            <div class="container"><p class="text-center text-white">Copyright &copy; Hypnos 2022</p></div>
-        {% endblock %}
-    </footer>
 </html>

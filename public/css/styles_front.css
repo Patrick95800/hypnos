@@ -16,7 +16,6 @@
 
 body {
     font-family: 'Lato', sans-serif;
-    padding: 20px;
 }
 
 
@@ -31,8 +30,8 @@ div.custom-banner-admin{
 
 div.custom-hotel-list{
     margin-top:100px;
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .btn{
