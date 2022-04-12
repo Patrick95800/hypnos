@@ -34,6 +34,7 @@
                                     <li><a class="dropdown-item" href="{{ path('booking_new') }}">Faire une réservation</a></li>
                                     <li><a class="dropdown-item" href="{{ path('bookings') }}">Mes réservations</a></li>
                                 </ul>
+                            <li class="nav-item"><a class="nav-link" href="{{ path('contact') }}">Contact</a></li>
                             </li>
                         </ul>
                     </div>
@@ -60,7 +61,7 @@
                 </div>
             </nav>
         {% endif %}
-        {% block body %}{% endblock %}
+        {% block body %}<main></main>{% endblock %}
         <footer>
             {% block footer %}
                 <div class="container"><p class="text-center text-white">Copyright &copy; Hypnos 2022</p></div>

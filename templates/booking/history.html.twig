@@ -24,7 +24,7 @@
                         {% if booking.status == constant('App\\Entity\\Booking::STATUS_ACCEPTED') %}
                             Acceptée
                             {% if booking.isAllowedToCancel() %}
-                                <a href="{{ path('booking_cancel', {'id': booking.id}) }}" class="btn btn-primary" role="button">Annuler</a>
+                                <a href="{{ path('booking_cancel', {'id': booking.id}) }}" class="btn btn-secondary" role="button">Annuler</a>
                             {% endif %}
                         {% elseif booking.status == constant('App\\Entity\\Booking::STATUS_CANCELLED') %}
                             Annulée

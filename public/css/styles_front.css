@@ -13,18 +13,22 @@
     src: url('https://fonts.googleapis.com/css2?family=Signika:wght@300&display=swap'); /* Google font */
 }
 
+nav{
+    margin-right : -50px;
+    margin-left : -50px;
+}
 
 body {
     font-family: 'Lato', sans-serif;
+    margin-right : 50px;
+    margin-left : 50px;
 }
 
 
 div.custom-banner{
     background: #00B2A9;
-}
-
-div.custom-banner-admin{
-    background: #1C1F2A;
+    margin-right : -50px;
+    margin-left : -50px;
 }
 
 
@@ -44,18 +48,18 @@ div.custom-hotel-list{
 
 }
 
-div.custom-footer{
-    background: #1C1F2A;
-    color: #1C1F2A;
-    padding-bottom: 30px;
-    padding-top: 30px;
-
-}
-
 footer{
     background: #00B2A9;
     margin-top: 30px;
     padding-bottom: 10px;
     padding-top: 10px;
+    margin-right: -50px;
+    margin-left: -50px;
 
+}
+
+@media (max-width: 700px) {
+    .custom-banner, .custom-hotel-list, .btn {
+        font-size: 1.5em;
+    }
 }
