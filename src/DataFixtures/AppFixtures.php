@@ -68,6 +68,9 @@ class AppFixtures extends Fixture
         $user4->setEmail('isabelle.durand@yahoo.fr');
         $hashedPassword = $this->passwordHasher->hashPassword($user4, 'isabelledu75');
         $user4->setPassword($hashedPassword);
+        $user4->setRoles([
+            User::ROLE_USER
+        ]);
         $manager->persist($user4);
 
         $manager->flush();

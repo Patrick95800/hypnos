@@ -6,8 +6,8 @@
     <h1>Paiement</h1>
 
     <form method="post" action="{{ path('booking_payment') }}">
-        <p>Pour rappel, vous souhaitez réservez un séjour de {{ booking.getNightsNumber() }} nuit(s), du {{ booking.beginAt|date('d/m/Y') }} au {{ booking.endAt|date('d/m/Y') }}</p>
-        <p>Le montant de votre réservation s'élève donc à : {{ booking.totalPriceInEuros }} € et se fera sur place le jour de votre arrivée</p>
+        <p>Pour rappel, vous souhaitez réservez un séjour de {{ booking.getNightsNumber() }} nuit(s), du {{ booking.beginAt|date('d/m/Y') }} au {{ booking.endAt|date('d/m/Y') }}.</p>
+        <p>Le montant de votre réservation s'élève donc à : {{ booking.totalPriceInEuros }} €. Le paiement se fera sur place le jour de votre arrivée.</p>
 
         <!--p>Attention : aucun moyen de paiement ne sera réellement débité.</p-->
         <button type="submit" class="btn btn-secondary">Confirmer ma reservation</button>

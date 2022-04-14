@@ -15,19 +15,13 @@
 
 body {
     font-family: 'Lato', sans-serif;
-
+    margin-right : 50px;
+    margin-left : 50px;
 }
 
-.navbar {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    background-color:#D0D3D4 ;
-    color: red;
+nav{
+    margin-right : -50px;
+    margin-left : -50px;
 }
 
 .btn{
@@ -44,19 +38,23 @@ body {
 
 div.custom-banner{
     background: #1C1F2A;
-}
-
-
-
-.form{
-    margin : 100px;
+    margin-right : -50px;
+    margin-left : -50px;
 }
 
 footer{
     background: #1C1F2A;
     color: #1C1F2A;
     margin-top: 30px;
+    margin-right : -50px;
+    margin-left : -50px;
     padding-bottom: 10px;
     padding-top: 10px;
 
+}
+
+@media (max-width: 700px) {
+    .custom-banner, .btn {
+        font-size: 1.5em;
+    }
 }
