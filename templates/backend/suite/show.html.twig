@@ -48,9 +48,9 @@
         </tbody>
     </table>
 
-    <p><a href="{{ path('backend_suite_edit', {'id': suite.id}) }}" class="btn btn-primary" role="button">Editer</a></p>
+    <p><a href="{{ path('backend_suite_edit', {'id': suite.id}) }}" class="btn btn-secondary" role="button">Editer</a></p>
 
     <p>{{ include('backend/suite/_delete_form.html.twig') }}</p>
 
-    <p><a href="{{ path('backend_suites') }}" class="btn btn-primary" role="button">Retour à la liste</a></p>
+    <p><a href="{{ path('backend_suites') }}" class="btn btn-secondary" role="button">Retour à la liste</a></p>
 {% endblock %}

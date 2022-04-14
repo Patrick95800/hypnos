@@ -19,8 +19,8 @@
                 <td>{{ suite.title }}</td>
                 <td>{{ suite.priceInEuros }} €</td>
                 <td>
-                    <a href="{{ path('backend_suite_show', {'id': suite.id}) }}" class="btn btn-primary" role="button">Afficher</a>
-                    <a href="{{ path('backend_suite_edit', {'id': suite.id}) }}" class="btn btn-primary" role="button">Editer</a>
+                    <a href="{{ path('backend_suite_show', {'id': suite.id}) }}" class="btn btn-secondary" role="button">Afficher</a>
+                    <a href="{{ path('backend_suite_edit', {'id': suite.id}) }}" class="btn btn-secondary" role="button">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('backend_suite_new') }}" class="btn btn-primary" role="button">Créer une nouvelle suite</a>
+    <a href="{{ path('backend_suite_new') }}" class="btn btn-secondary" role="button">Créer une nouvelle suite</a>
 {% endblock %}

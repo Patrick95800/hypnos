@@ -41,9 +41,9 @@
         </tbody>
     </table>
 
-    <p><a href="{{ path('backend_user_edit', {'id': user.id}) }}" class="btn btn-primary" role="button">Edition</a></p>
+    <p><a href="{{ path('backend_user_edit', {'id': user.id}) }}" class="btn btn-secondary" role="button">Edition</a></p>
 
     <p>{{ include('backend/user/_delete_form.html.twig') }}</p>
 
-    <p><a href="{{ path('backend_users') }}" class="btn btn-primary" role="button">Retour à la liste</a></p>
+    <p><a href="{{ path('backend_users') }}" class="btn btn-secondary" role="button">Retour à la liste</a></p>
 {% endblock %}

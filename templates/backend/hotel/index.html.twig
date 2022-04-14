@@ -21,8 +21,8 @@
                 <td>{{ hotel.slug }}</td>
                 <td>{{ hotel.address }}</td>
                 <td>
-                    <a href="{{ path('backend_hotel_show', {'id': hotel.id}) }}" class="btn btn-primary" role="button">Afficher</a>
-                    <a href="{{ path('backend_hotel_edit', {'id': hotel.id}) }}" class="btn btn-primary" role="button">Editer</a>
+                    <a href="{{ path('backend_hotel_show', {'id': hotel.id}) }}" class="btn btn-secondary" role="button">Afficher</a>
+                    <a href="{{ path('backend_hotel_edit', {'id': hotel.id}) }}" class="btn btn-secondary" role="button">Editer</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('backend_hotel_new') }}" class="btn btn-primary" role="button">Créer un nouvel établissement</a>
+    <a href="{{ path('backend_hotel_new') }}" class="btn btn-secondary" role="button">Créer un nouvel établissement</a>
 {% endblock %}
