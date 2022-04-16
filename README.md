@@ -13,7 +13,7 @@ You must have <a href="https://symfony.com/download" rel="nofollow"> Symfony</a>
 
 ## How to install ?
 
-1) Clone the repo : `git clone https://github.com/StartBootstrap/startbootstrap-sb-admin.git`
+1) Clone the repo : `git clone https://github.com/Patrick95800/hypnos.git`
 2) Copy the file `.env` to `.env.local`.
 3) Edit the `.env.local` file, and change the following values : 
 
